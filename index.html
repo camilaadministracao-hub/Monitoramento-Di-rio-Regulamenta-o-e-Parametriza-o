@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Monitoramento Diário | Regulamentação e Parametrização</title>
+  <style>
+    :root{--bg:#f4f7fb;--card:#fff;--text:#172033;--muted:#68758a;--primary:#00856f;--primary2:#00a887;--line:#dfe6ef;--danger:#b42318;--warn:#b54708;--info:#175cd3;--ok:#027a48;--shadow:0 18px 45px rgba(15,38,64,.10);--radius:22px}
+    *{box-sizing:border-box} body{margin:0;font-family:Inter,Segoe UI,Arial,sans-serif;background:linear-gradient(135deg,#eefaf7,#f6f8fc 38%,#eef3ff);color:var(--text)}
+    .layout{display:grid;grid-template-columns:280px 1fr;min-height:100vh}.side{background:#08362f;color:white;padding:26px 20px;position:sticky;top:0;height:100vh}.brand{display:flex;gap:12px;align-items:center;margin-bottom:34px}.logo{width:44px;height:44px;border-radius:14px;background:linear-gradient(135deg,var(--primary2),#fff);display:grid;place-items:center;color:#08362f;font-weight:900}.brand h1{font-size:16px;margin:0;line-height:1.25}.brand span{display:block;font-size:12px;opacity:.8;margin-top:4px}.nav{display:grid;gap:8px}.nav a{color:#e8fffa;text-decoration:none;padding:12px 14px;border-radius:14px;display:flex;gap:10px;align-items:center}.nav a.active,.nav a:hover{background:rgba(255,255,255,.12)}
+    main{padding:28px;max-width:1500px;width:100%}.hero{background:linear-gradient(135deg,#006b5a,#00a887);border-radius:28px;color:white;padding:30px;box-shadow:var(--shadow);display:flex;justify-content:space-between;gap:24px;align-items:center}.hero h2{font-size:30px;margin:0 0 8px}.hero p{margin:0;opacity:.92}.actions{display:flex;gap:12px;flex-wrap:wrap}.btn{border:0;border-radius:14px;padding:12px 16px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;gap:8px;align-items:center}.btn.primary{background:white;color:#006b5a}.btn.ghost{background:rgba(255,255,255,.16);color:white;border:1px solid rgba(255,255,255,.28)}.btn.soft{background:#e8f7f3;color:#006b5a}.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:22px 0}.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}.metric small{color:var(--muted);font-weight:700}.metric strong{display:block;font-size:32px;margin-top:10px}.metric span{font-size:13px;color:var(--muted)}
+    .toolbar{display:grid;grid-template-columns:1fr 210px 210px auto;gap:12px;margin:22px 0}.input,.select{width:100%;border:1px solid var(--line);background:white;border-radius:14px;padding:13px 14px;font-size:14px}.section-title{display:flex;justify-content:space-between;align-items:center;margin:18px 0 12px}.section-title h3{margin:0;font-size:20px}.table-wrap{overflow:auto}.table{width:100%;border-collapse:separate;border-spacing:0 10px}.table th{text-align:left;font-size:12px;color:var(--muted);padding:0 12px;text-transform:uppercase}.table td{background:white;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:14px 12px;vertical-align:top}.table td:first-child{border-left:1px solid var(--line);border-radius:16px 0 0 16px}.table td:last-child{border-right:1px solid var(--line);border-radius:0 16px 16px 0}.tag{display:inline-block;padding:6px 10px;border-radius:999px;font-weight:800;font-size:12px}.tag.ok{background:#ecfdf3;color:var(--ok)}.tag.info{background:#eff8ff;color:var(--info)}.tag.warn{background:#fffaeb;color:var(--warn)}.tag.danger{background:#fef3f2;color:var(--danger)}.muted{color:var(--muted)}.link{color:#006b5a;font-weight:800;text-decoration:none}.sources{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.source{padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff}.source b{display:block}.footer{color:var(--muted);font-size:12px;margin:20px 0}.empty{padding:30px;text-align:center;color:var(--muted)}
+    @media(max-width:980px){.layout{grid-template-columns:1fr}.side{height:auto;position:relative}.grid{grid-template-columns:repeat(2,1fr)}.toolbar{grid-template-columns:1fr}.hero{display:block}.actions{margin-top:16px}.sources{grid-template-columns:1fr}} @media(max-width:600px){main{padding:16px}.grid{grid-template-columns:1fr}.hero h2{font-size:24px}}
+  </style>
+</head>
+<body>
+<div class="layout">
+  <aside class="side">
+    <div class="brand"><div class="logo">RP</div><div><h1>Monitoramento Diário</h1><span>Regulamentação e Parametrização</span></div></div>
+    <nav class="nav"><a class="active" href="#painel">🏠 Painel de controle</a><a href="#agora">📊 Agora</a><a href="#resultados">🔍 Pesquisa</a><a href="#orgaos">🏛️ Órgãos</a><a href="#alertas">🚨 Alertas</a></nav>
+  </aside>
+  <main>
+    <section class="hero" id="painel">
+      <div><h2>Painel de controle</h2><p>Monitoramento diário de notícias e legislações para a equipe. Roda automaticamente às 07h e pode ser executado novamente quando necessário.</p></div>
+      <div class="actions"><a id="runBtn" class="btn primary" target="_blank" rel="noopener">▶️ Executar novamente</a><button class="btn ghost" onclick="carregar()">🔄 Atualizar tela</button><button class="btn ghost" onclick="exportarCSV()">📄 Exportar Excel</button></div>
+    </section>
+
+    <section class="grid" id="agora">
+      <div class="card metric"><small>📅 Última atualização</small><strong id="mData">—</strong><span>Horário do último robô</span></div>
+      <div class="card metric"><small>📊 Itens encontrados</small><strong id="mItens">0</strong><span>Notícias e publicações</span></div>
+      <div class="card metric"><small>🚨 Alertas</small><strong id="mAlertas">0</strong><span>Atenção, avaliação ou ação</span></div>
+      <div class="card metric"><small>🏛️ Fontes consultadas</small><strong id="mFontes">0</strong><span id="mErros">Sem erros</span></div>
+    </section>
+
+    <section class="card" id="resultados">
+      <div class="section-title"><h3>🔍 Pesquisa e resultados</h3><span class="muted" id="contador">0 registros</span></div>
+      <div class="toolbar"><input class="input" id="q" placeholder="Pesquisar por palavra, órgão, assunto..." oninput="render()"><select class="select" id="orgao" onchange="render()"><option value="">Todos os órgãos</option></select><select class="select" id="prioridade" onchange="render()"><option value="">Todas as prioridades</option><option>Informativo</option><option>Atenção</option><option>Necessita avaliação</option><option>Ação imediata</option></select><button class="btn soft" onclick="limparFiltros()">Limpar</button></div>
+      <div class="table-wrap"><table class="table"><thead><tr><th>Prioridade</th><th>Órgão</th><th>Tipo</th><th>Publicação</th><th>Link</th></tr></thead><tbody id="tbody"><tr><td colspan="5" class="empty">Carregando dados...</td></tr></tbody></table></div>
+    </section>
+
+    <section class="card" id="orgaos" style="margin-top:22px"><div class="section-title"><h3>🏛️ Separação por órgão</h3><span class="muted">Status da última consulta</span></div><div class="sources" id="sources"></div></section>
+
+    <p class="footer">Versão 3.0 • Funcionamento 100% pelo navegador + GitHub Actions. Para publicar no GitHub Pages: Settings › Pages › Deploy from a branch › main › /root.</p>
+  </main>
+</div>
+<script>
+const REPO = 'camilaadministracao-hub/Monitoramento-Di-rio-Regulamenta-o-e-Parametriza-o';
+let dados = {itens:[], fontes:[]};
+document.getElementById('runBtn').href = `https://github.com/${REPO}/actions/workflows/monitoramento.yml`;
+function classe(p){ if(p==='Ação imediata') return 'danger'; if(p==='Necessita avaliação'||p==='Atenção') return 'warn'; if(p==='Informativo') return 'info'; return 'ok'; }
+async function carregar(){
+  try{ const r = await fetch('data/resultado_atual.json?cache=' + Date.now()); dados = await r.json(); atualizarMetricas(); popularOrgaos(); render(); }
+  catch(e){ document.getElementById('tbody').innerHTML = '<tr><td colspan="5" class="empty">Não foi possível carregar o arquivo data/resultado_atual.json. Execute o robô uma vez no GitHub Actions.</td></tr>'; }
+}
+function atualizarMetricas(){
+  mData.textContent = dados.executado_em || '—'; mItens.textContent = dados.total_itens ?? (dados.itens||[]).length; mAlertas.textContent = dados.total_alertas ?? 0; mFontes.textContent = dados.total_fontes ?? (dados.fontes||[]).length; mErros.textContent = (dados.fontes_com_erro||0) ? `${dados.fontes_com_erro} fonte(s) com erro` : 'Sem erros';
+}
+function popularOrgaos(){
+  const orgs = [...new Set((dados.itens||[]).map(i=>i.orgao).filter(Boolean))].sort();
+  orgao.innerHTML = '<option value="">Todos os órgãos</option>' + orgs.map(o=>`<option>${o}</option>`).join('');
+  sources.innerHTML = (dados.fontes||[]).map(f=>`<div class="source"><b>${f.orgao}</b><span class="muted">${f.tipo}</span><br><span class="tag ${f.status==='ok'?'ok':'danger'}">${f.status==='ok'?'OK':'Erro'}</span> <span class="muted">${f.itens||0} itens</span></div>`).join('') || '<div class="empty">Aguardando primeira execução do robô.</div>';
+}
+function filtrados(){
+  const termo = q.value.toLowerCase().trim(), o = orgao.value, p = prioridade.value;
+  return (dados.itens||[]).filter(i => (!o||i.orgao===o) && (!p||i.prioridade===p) && (!termo || `${i.orgao} ${i.tipo} ${i.titulo} ${i.resumo} ${i.prioridade}`.toLowerCase().includes(termo)));
+}
+function render(){
+  const lista = filtrados(); contador.textContent = `${lista.length} registro(s)`;
+  tbody.innerHTML = lista.length ? lista.map(i=>`<tr><td><span class="tag ${classe(i.prioridade)}">${i.prioridade||'Informativo'}</span></td><td><b>${i.orgao||''}</b></td><td>${i.tipo||''}</td><td><b>${i.titulo||''}</b><br><span class="muted">${i.resumo||''}</span></td><td><a class="link" href="${i.link||'#'}" target="_blank" rel="noopener">Abrir</a></td></tr>`).join('') : '<tr><td colspan="5" class="empty">Nenhum resultado encontrado.</td></tr>';
+}
+function limparFiltros(){ q.value=''; orgao.value=''; prioridade.value=''; render(); }
+function exportarCSV(){
+  const rows = [['Prioridade','Órgão','Tipo','Título','Resumo','Link'], ...filtrados().map(i=>[i.prioridade,i.orgao,i.tipo,i.titulo,i.resumo,i.link])];
+  const csv = rows.map(r=>r.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(';')).join('\n');
+  const blob = new Blob(['\ufeff'+csv], {type:'text/csv;charset=utf-8;'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='monitoramento_regulatorio.csv'; a.click(); URL.revokeObjectURL(a.href);
+}
+carregar();
+</script>
+</body>
+</html>

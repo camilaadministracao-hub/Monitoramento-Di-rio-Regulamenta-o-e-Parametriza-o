@@ -1,0 +1,15 @@
+{
+  "fontes": [
+    {"orgao":"ANS", "tipo":"Notícias", "url":"https://www.gov.br/ans/pt-br/assuntos/noticias", "seletor":"a", "ativo":true},
+    {"orgao":"ANVISA", "tipo":"Notícias", "url":"https://www.gov.br/anvisa/pt-br/assuntos/noticias-anvisa", "seletor":"a", "ativo":true},
+    {"orgao":"Ministério da Saúde", "tipo":"Notícias", "url":"https://www.gov.br/saude/pt-br/assuntos/noticias", "seletor":"a", "ativo":true},
+    {"orgao":"CONITEC", "tipo":"Notícias", "url":"https://www.gov.br/conitec/pt-br/assuntos/noticias", "seletor":"a", "ativo":true},
+    {"orgao":"CFM", "tipo":"Notícias", "url":"https://portal.cfm.org.br/noticias/", "seletor":"a", "ativo":true},
+    {"orgao":"CREMERS", "tipo":"Notícias", "url":"https://cremers.org.br/noticias/", "seletor":"a", "ativo":true},
+    {"orgao":"DOU", "tipo":"Consulta", "url":"https://www.in.gov.br/leiturajornal", "seletor":"a", "ativo":true},
+    {"orgao":"Receita Federal", "tipo":"Notícias", "url":"https://www.gov.br/receitafederal/pt-br/assuntos/noticias", "seletor":"a", "ativo":true},
+    {"orgao":"ANPD", "tipo":"Notícias", "url":"https://www.gov.br/anpd/pt-br/assuntos/noticias", "seletor":"a", "ativo":true},
+    {"orgao":"INPI", "tipo":"Notícias", "url":"https://www.gov.br/inpi/pt-br/central-de-conteudo/noticias", "seletor":"a", "ativo":true}
+  ],
+  "palavras_alerta": ["resolução", "instrução normativa", "portaria", "lei", "decreto", "suspensão", "interdição", "recolhimento", "ans", "anvisa", "prazo", "obrigatório", "sanitária", "registro", "alvará", "cnes", "tiss", "rol"]
+}

@@ -1,8 +1,42 @@
-let dados={itens:[],erros:[]};let orgaoFiltro='Todos';
+const REPO_ACTIONS_URL='https://github.com/camilaadministracao-hub/Monitoramento-Di-rio-Regulamenta-o-e-Parametriza-o/actions';
+let dados={itens:[],fontes:[]};
 const $=id=>document.getElementById(id);
-async function carregar(){try{const r=await fetch('data/resultado_atual.json?ts='+Date.now());dados=await r.json();render()}catch(e){$('tbody').innerHTML='<tr><td colspan="6" class="error">Não foi possível carregar data/resultado_atual.json. Rode o workflow no GitHub Actions.</td></tr>'}}
-function prioridadeClasse(p){p=(p||'Baixa').toLowerCase();if(p.includes('crítica'))return's-critica';if(p.includes('alta'))return's-alta';if(p.includes('média'))return's-media';return's-baixa'}
-function render(){const itens=dados.itens||[];$('mAtualizacao').textContent=dados.gerado_em||'-';$('mConsultas').textContent=dados.total_consultas??0;$('mItens').textContent=dados.total_itens??itens.length;$('mAlertas').textContent=dados.alertas??0;const orgaos=['Todos',...Array.from(new Set(itens.map(i=>i.orgao))).sort()];$('orgaos').innerHTML=orgaos.map(o=>`<li class="${o===orgaoFiltro?'active':''}" onclick="orgaoFiltro='${o.replaceAll("'","\\'")}';render()">${o}</li>`).join('');const sel=$('fOrgao');sel.innerHTML=orgaos.map(o=>`<option ${o===orgaoFiltro?'selected':''}>${o}</option>`).join('');filtrar()}
-function filtrar(){const q=($('busca').value||'').toLowerCase();const p=$('fPrioridade').value;const tipo=$('fTipo').value;orgaoFiltro=$('fOrgao').value||orgaoFiltro;let arr=(dados.itens||[]).filter(i=>{return(orgaoFiltro==='Todos'||i.orgao===orgaoFiltro)&&(!p||i.prioridade===p)&&(!tipo||i.tipo===tipo)&&(!q||JSON.stringify(i).toLowerCase().includes(q))});$('tbody').innerHTML=arr.length?arr.map(i=>`<tr><td><b>${i.orgao||''}</b><br><span class="muted">${i.tipo||''}</span></td><td><div class="item-title">${i.titulo||''}</div><a class="item-url" href="${i.url||'#'}" target="_blank">abrir fonte</a></td><td>${i.data||''}</td><td><span class="status ${prioridadeClasse(i.prioridade)}">${i.prioridade||'Baixa'}</span></td><td>${i.resumo||''}</td></tr>`).join(''):'<tr><td colspan="5" class="muted">Nenhum item encontrado.</td></tr>';const erros=dados.erros||[];$('erros').innerHTML=erros.length?erros.map(e=>`<div class="error">${e.orgao}: ${e.erro}</div>`).join(''):'<span class="ok">Nenhum erro registrado na última execução.</span>'}
-function exportarExcel(){const linhas=[['Órgão','Tipo','Título','Data','Prioridade','Resumo','URL'],...(dados.itens||[]).map(i=>[i.orgao,i.tipo,i.titulo,i.data,i.prioridade,i.resumo,i.url])];const csv=linhas.map(l=>l.map(v=>'"'+String(v??'').replaceAll('"','""')+'"').join(';')).join('\n');const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='monitoramento_regulatorio.csv';a.click()}
-window.addEventListener('DOMContentLoaded',()=>{['busca','fOrgao','fPrioridade','fTipo'].forEach(id=>$(id).addEventListener('input',filtrar));carregar()});
+function cls(p){return p==='Ação imediata'?'danger':p==='Necessita avaliação'?'warn':'info'}
+async function carregar(){
+  try{
+    const r=await fetch('data/resultado_atual.json?ts='+Date.now());
+    dados=await r.json();
+    render();
+  }catch(e){
+    $('lista').innerHTML='<article>Não foi possível carregar <strong>data/resultado_atual.json</strong>. Rode o Actions primeiro.</article>';
+    $('resumo').textContent='Aguardando primeira execução do robô.';
+  }
+}
+function render(){
+  const now=new Date();
+  $('agora').textContent='Tela atualizada em '+now.toLocaleString('pt-BR');
+  $('atualizacao').textContent=dados.gerado_em||'--';
+  $('total').textContent=dados.total||0;
+  $('erros').textContent=dados.erros||0;
+  $('alertas').textContent=(dados.itens||[]).filter(i=>['Ação imediata','Necessita avaliação'].includes(i.prioridade)).length;
+  $('resumo').textContent=`Monitoramento carregado com ${dados.total||0} publicação(ões). Revise os alertas e exporte a planilha quando necessário.`;
+  const orgs=[...new Set([...(dados.itens||[]).map(i=>i.orgao),...(dados.fontes||[]).map(f=>f.orgao)])].sort();
+  $('orgao').innerHTML='<option value="">Todos os órgãos</option>'+orgs.map(o=>`<option>${o}</option>`).join('');
+  renderLista();renderFontes();
+}
+function renderLista(){
+  const q=$('busca').value.toLowerCase();
+  const org=$('orgao').value;
+  let itens=(dados.itens||[]).filter(i=>(!org||i.orgao===org)&&[i.orgao,i.titulo,i.prioridade,i.tipo,i.resumo].join(' ').toLowerCase().includes(q));
+  $('lista').innerHTML=itens.length?itens.map(i=>`<article><div class="meta"><span class="tag">${i.orgao}</span><span class="tag">${i.tipo}</span><span class="tag ${cls(i.prioridade)}">${i.prioridade}</span><span class="tag">${i.data||'sem data'}</span></div><h3>${i.titulo}</h3><p>${i.resumo||''}</p><a href="${i.link}" target="_blank" rel="noopener">Abrir publicação</a></article>`).join(''):'<article>Nenhum item encontrado para o filtro.</article>';
+}
+function renderFontes(){
+  $('fontesLista').innerHTML=(dados.fontes||[]).map(f=>`<div><b>${f.orgao}</b><p class="${f.status==='ok'?'ok':'erro'}">${f.status==='ok'?'Online/consultado':'Erro na consulta'}</p><small>${f.erro||f.url}</small></div>`).join('') || '<div>Aguardando primeira execução.</div>';
+}
+function exportar(){
+  const rows=[['Órgão','Tipo','Prioridade','Data','Título','Resumo','Link'],...(dados.itens||[]).map(i=>[i.orgao,i.tipo,i.prioridade,i.data,i.titulo,i.resumo,i.link])];
+  const csv=rows.map(r=>r.map(c=>'"'+String(c||'').replaceAll('"','""')+'"').join(';')).join('\n');
+  const blob=new Blob(['\ufeff'+csv],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='monitoramento_regulatorio_unimed.csv';a.click();
+}
+$('busca').addEventListener('input',renderLista);$('orgao').addEventListener('change',renderLista);$('exportBtn').addEventListener('click',exportar);$('runBtn').addEventListener('click',()=>window.open(REPO_ACTIONS_URL,'_blank'));carregar();

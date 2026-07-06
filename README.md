@@ -1,31 +1,15 @@
-# Monitoramento Diário — Regulamentação e Parametrização
+# Monitoramento Regulatório Diário — Unimed Vale do Sinos/RS
 
-Sistema web para monitoramento diário de notícias e legislações regulatórias.
+Sistema web para a área de Regulamentação e Parametrização, com painel em identidade visual Unimed e robô em nuvem via GitHub Actions.
 
-## Como publicar no GitHub
+## MVP monitorado
+CREMERS, CFM, COREN-RS, COFEN, CRF-RS, CRN-2, CRO-RS, CRTR-6, ANVISA, Alertas ANVISA e DOU.
 
-1. Extraia o ZIP.
-2. No repositório, clique em **Add file > Upload files**.
-3. Arraste todos os arquivos e pastas de dentro da pasta extraída.
-4. Clique em **Commit changes**.
-
-## Como ativar o site
-
-1. Vá em **Settings > Pages**.
-2. Em **Build and deployment**, selecione:
-   - Source: **Deploy from a branch**
-   - Branch: **main**
-   - Folder: **/root**
-3. Clique em **Save**.
-
-## Como rodar o robô manualmente
-
-1. Vá em **Actions**.
-2. Clique em **Monitoramento Regulatório Diário**.
-3. Clique em **Run workflow**.
-
-O robô também roda automaticamente todos os dias às 07h.
+## Como ativar
+1. Subir todo o conteúdo extraído no GitHub.
+2. Conferir Pages em Settings > Pages > main / root.
+3. Ir em Actions > Monitoramento Regulatório Diário > Run workflow.
+4. Abrir a página publicada no GitHub Pages.
 
 ## Observação
-
-Nenhum programa precisa ser instalado nos computadores da equipe. O Python roda apenas na nuvem do GitHub Actions.
+O botão "Executar novamente" abre a tela do GitHub Actions. Por segurança, o GitHub exige clicar em Run workflow lá dentro.

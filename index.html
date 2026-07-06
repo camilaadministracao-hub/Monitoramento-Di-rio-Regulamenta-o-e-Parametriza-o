@@ -1,1 +1,88 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Monitoramento Diário — Regulamentação e Parametrização</title><link rel="stylesheet" href="css/style.css"></head><body><header><div class="top"><div class="brand"><h1>Monitoramento Diário — Regulamentação e Parametrização</h1><p>Painel diário de notícias, legislações e alertas regulatórios.</p></div><div class="actions"><a class="btn primary" target="_blank" href="https://github.com/camilaadministracao-hub/Monitoramento-Di-rio-Regulamenta-o-e-Parametriza-o/actions/workflows/monitoramento.yml">▶ Executar novamente</a><button class="btn" onclick="carregar()">Atualizar painel</button><button class="btn" onclick="exportarExcel()">📄 Exportar Excel</button></div></div></header><main><section class="grid"><div class="card"><div class="label">📅 Última atualização</div><div class="metric" id="mAtualizacao">-</div></div><div class="card"><div class="label">📊 Consultas realizadas</div><div class="metric" id="mConsultas">0</div></div><div class="card"><div class="label">🏛️ Itens encontrados</div><div class="metric" id="mItens">0</div></div><div class="card"><div class="label">🚨 Alertas</div><div class="metric" id="mAlertas">0</div></div></section><section class="section card"><div class="toolbar"><input class="input" id="busca" placeholder="🔍 Pesquisar por palavra, órgão, assunto ou legislação..."><select id="fOrgao"></select><select id="fPrioridade"><option value="">Todas as prioridades</option><option>Baixa</option><option>Média</option><option>Alta</option><option>Crítica</option></select><select id="fTipo"><option value="">Todos os tipos</option><option>Notícias</option><option>Consulta</option><option>Legislação</option></select><button class="btn" onclick="orgaoFiltro='Todos';document.getElementById('busca').value='';document.getElementById('fPrioridade').value='';document.getElementById('fTipo').value='';render()">Limpar</button></div></section><section class="section layout"><aside class="card sidebar"><h3>🏛️ Órgãos</h3><ul id="orgaos"><li>Carregando...</li></ul><h3>Status do robô</h3><div id="erros" class="muted">Carregando...</div></aside><section class="card table-wrap"><h2>Agora</h2><table><thead><tr><th>Órgão</th><th>Publicação</th><th>Data</th><th>Prioridade</th><th>Resumo</th></tr></thead><tbody id="tbody"><tr><td colspan="5">Carregando...</td></tr></tbody></table></section></section></main><div class="footer">Sistema web sem instalação local • GitHub Pages + GitHub Actions</div><script src="js/app.js"></script></body></html>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Monitoramento Regulatório Diário | Unimed Vale do Sinos/RS</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <aside class="sidebar">
+    <div class="brand-card">
+      <div class="brand-title">Unimed</div>
+      <div class="brand-subtitle">Vale do Sinos/RS</div>
+    </div>
+    <div class="hello">
+      <strong>Bom dia!</strong>
+      <span>Transformando informação em ação.</span>
+    </div>
+    <nav>
+      <a class="active" href="#dashboard">🏠 Dashboard</a>
+      <a href="#novo">🤖 Novo monitoramento</a>
+      <a href="#publicacoes">📑 Publicações</a>
+      <a href="#fontes">🏛️ Órgãos monitorados</a>
+      <a href="#historico">📂 Histórico</a>
+      <a href="#manual">📘 Manual do sistema</a>
+    </nav>
+  </aside>
+
+  <main class="app-shell">
+    <header class="topbar">
+      <div>
+        <h1>Monitoramento Regulatório Diário</h1>
+        <p>Regulamentação e Parametrização</p>
+      </div>
+      <div class="status-pill"><span></span> GitHub Pages · robô na nuvem</div>
+    </header>
+
+    <section id="dashboard" class="cards">
+      <article><b id="total">0</b><span>Publicações identificadas</span></article>
+      <article><b id="alertas">0</b><span>Alertas para avaliação</span></article>
+      <article><b id="erros">0</b><span>Fontes com erro</span></article>
+      <article><b id="atualizacao">--</b><span>Última atualização</span></article>
+    </section>
+
+    <section id="novo" class="grid two">
+      <article class="panel">
+        <h2>Resumo do monitoramento</h2>
+        <p id="resumo">Carregando dados do monitoramento...</p>
+        <div class="actions">
+          <button id="runBtn">▶ Executar novamente</button>
+          <button class="secondary" id="exportBtn">📄 Exportar Excel</button>
+        </div>
+      </article>
+      <article class="panel">
+        <h2>Premissas da versão</h2>
+        <p>O MVP consulta os órgãos definidos para a rotina da área e apresenta os achados em painel único.</p>
+        <p>O botão <strong>Executar novamente</strong> abre o GitHub Actions; por segurança do GitHub, o clique final em <strong>Run workflow</strong> é feito lá.</p>
+      </article>
+    </section>
+
+    <section class="toolbar">
+      <input id="busca" placeholder="Pesquisar por órgão, título, tipo ou prioridade...">
+      <select id="orgao"><option value="">Todos os órgãos</option></select>
+    </section>
+
+    <section id="publicacoes" class="panel">
+      <div class="section-head">
+        <h2>🚨 Publicações e legislações encontradas</h2>
+        <small id="agora">--</small>
+      </div>
+      <div id="lista" class="lista"></div>
+    </section>
+
+    <section id="fontes" class="panel">
+      <h2>🏛️ Órgãos monitorados</h2>
+      <div id="fontesLista" class="fontes"></div>
+    </section>
+
+    <section id="manual" class="panel muted-panel">
+      <h2>Manual rápido</h2>
+      <p>Uso diário: abrir o sistema, revisar os alertas, filtrar por órgão, exportar a planilha quando necessário e encaminhar as publicações relevantes.</p>
+      <p>Execução automática: todos os dias às 07h. Execução manual: botão <strong>Executar novamente</strong>.</p>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

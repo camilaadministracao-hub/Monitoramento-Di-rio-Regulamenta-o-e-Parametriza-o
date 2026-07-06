@@ -2,7 +2,7 @@ name: Monitoramento Regulatório Diário
 
 on:
   schedule:
-    - cron: '0 10 * * *' # 07h no Brasil
+    - cron: '0 10 * * *' # 07h Brasília
   workflow_dispatch:
 
 permissions:
@@ -14,18 +14,18 @@ jobs:
     steps:
       - name: Baixar repositório
         uses: actions/checkout@v4
-      - name: Preparar Python
+      - name: Configurar Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
       - name: Instalar dependências
-        run: pip install requests beautifulsoup4
-      - name: Executar robô
+        run: pip install requests beautifulsoup4 lxml
+      - name: Rodar monitoramento
         run: python scripts/monitorar.py
-      - name: Gravar resultado
+      - name: Salvar resultados
         run: |
           git config user.name "monitoramento-automatico"
           git config user.email "actions@github.com"
           git add data/resultado_atual.json data/historico/*.json
-          git commit -m "Atualiza monitoramento regulatório" || echo "Sem alterações"
+          git commit -m "Atualiza monitoramento regulatório" || echo "Sem alterações para salvar"
           git push

@@ -1,9 +1,8 @@
 {
   "gerado_em": "Aguardando primeira execução",
-  "total_consultas": 0,
-  "total_itens": 0,
-  "novidades": 0,
-  "alertas": 0,
-  "erros": [],
+  "total": 0,
+  "novos": 0,
+  "erros": 0,
+  "fontes": [],
   "itens": []
 }

@@ -1,0 +1,43 @@
+{
+  "versao": "4.1",
+  "documento_referencia": "IT-SUP-9.0244 - Revisão 06",
+  "observacao": "A parte referente à ANS foi expressamente desconsiderada pela área.",
+  "fontes_incluidas": [
+    "DOU",
+    "ANVISA",
+    "ALERTAS ANVISA",
+    "CFM",
+    "CREMERS",
+    "COFEN",
+    "COREN-RS",
+    "CRF-RS",
+    "CRN-2",
+    "CRTR-6",
+    "CRO-RS"
+  ],
+  "fontes_excluidas": [
+    "ANS"
+  ],
+  "regras_aplicadas": {
+    "encaminhar": [
+      "medicamentos",
+      "cancelamento de registros de medicamentos",
+      "cancelamento de registros de produtos para saúde",
+      "saneantes",
+      "fórmulas infantis",
+      "temas assistenciais pertinentes"
+    ],
+    "descartar": [
+      "fumo e tabaco",
+      "cosméticos",
+      "assuntos trabalhistas",
+      "ensaios clínicos",
+      "uso in vitro",
+      "deferimentos e indeferimentos",
+      "certificação de boas práticas",
+      "sistemas e equipamentos monitorados pela Engenharia Clínica"
+    ],
+    "validacao_humana": true,
+    "usar_link_direto_da_publicacao": true
+  }
+}

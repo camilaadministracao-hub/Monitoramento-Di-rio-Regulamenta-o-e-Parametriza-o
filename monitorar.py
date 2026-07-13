@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 Monitoramento Regulatório Diário — Unimed Vale do Sinos/RS
-Versão 4.0 — motor em nuvem, histórico diário e backup completo.
+Versão 4.1 — ANS fora do escopo; motor em nuvem, histórico diário e backup completo.
 """
 import hashlib
 import json
@@ -46,11 +46,26 @@ HEADERS = {
     "Accept-Language":"pt-BR,pt;q=0.9,en;q=0.7"
 }
 
+# Regras da IT-SUP-9.0244 aplicáveis ao projeto.
 DESCARTAR = [
     "cosmético","cosmetico","fumo","tabaco","assunto trabalhista","ensaios clínicos","ensaio clínico",
     "uso in vitro","deferimento","indeferimento","certificação de boas práticas",
-    "autorização de funcionamento de empresa"," afe ","ans","saúde suplementar","tiss","idss","nip",
-    "ressarcimento ao sus","equipamento médico","equipamentos médicos","sistemas e equipamentos"
+    "autorização de funcionamento de empresa"," afe ",
+    "equipamento médico","equipamentos médicos","sistemas e equipamentos"
+]
+
+# A parte da ANS foi expressamente retirada do escopo deste projeto.
+EXCLUIR_ANS = [
+    "agência nacional de saúde suplementar",
+    "agencia nacional de saude suplementar",
+    "ans",
+    "saúde suplementar",
+    "saude suplementar",
+    "tiss",
+    "idss",
+    "nip",
+    "ressarcimento ao sus",
+    "rol de procedimentos"
 ]
 
 MONITORAR = [
@@ -79,6 +94,11 @@ def carregar_ids_anteriores():
         return {str(x.get("id")) for x in anterior.get("publicacoes",[]) if x.get("id")}
     except Exception:
         return set()
+
+def fora_escopo_ans(texto):
+    """Retorna True quando o conteúdo pertence à rotina da ANS, excluída deste projeto."""
+    t = " " + norm(texto).lower() + " "
+    return any(termo in t for termo in EXCLUIR_ANS)
 
 def decisao(texto):
     t=" "+norm(texto).lower()+" "
@@ -148,6 +168,8 @@ def consultar(site, ids_anteriores):
             continue
         vistos.add(chave)
         texto=f"{titulo} {link}"
+        if fora_escopo_ans(texto):
+            continue
         dec,impacto,just=decisao(texto)
         tipo=site["tipo"]
         data_dou=HOJE if tipo=="DOU" else "N/A"
@@ -177,7 +199,7 @@ def consultar(site, ids_anteriores):
             "decisao":dec,
             "impacto":impacto,
             "justificativa":just,
-            "regra":"MOTOR-V4.0",
+            "regra":"MOTOR-V4.1-IT-SEM-ANS",
             "novo":chave not in ids_anteriores,
             "relevancia":score
         })
@@ -209,7 +231,7 @@ def main():
     fontes_status.sort(key=lambda x:x["fonte"])
 
     saida={
-        "versao":"4.0-final-backup-completo",
+        "versao":"4.1-sem-ans-backup-completo",
         "gerado_em":AGORA.isoformat(),
         "fontes_monitoradas":[x["fonte"] for x in FONTES],
         "fontes_status":fontes_status,

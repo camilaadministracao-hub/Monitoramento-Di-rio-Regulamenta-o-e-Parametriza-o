@@ -302,7 +302,7 @@ td.actions{min-width:135px}
         </div>
 
         <div class="card">
-          <h2>Motor de Decisão</h2>
+          <h2>Motor de Decisão — conforme IT (exceto ANS)</h2>
           <p>Critérios oficiais aplicados conforme a IT-SUP-9.0244 e complementos definidos pela Regulamentação.</p>
           <table>
             <tr><th>Assunto identificado</th><th>Ação</th><th>Motivo</th></tr>
@@ -321,7 +321,6 @@ td.actions{min-width:135px}
             <tr><td>Deferimentos/Indeferimentos</td><td>Descartar</td><td>Desconsiderar conforme IT.</td></tr>
             <tr><td>Certificação de Boas Práticas</td><td>Descartar</td><td>Desconsiderar conforme IT.</td></tr>
             <tr><td>Equipamentos médicos, sistemas e equipamentos</td><td>Descartar</td><td>Monitoramento realizado pela Engenharia Clínica.</td></tr>
-            <tr><td>ANS e saúde suplementar</td><td>Descartar</td><td>Monitoramento realizado por outra colega/rotina da área.</td></tr>
             <tr><td>Autorização de Funcionamento de Empresa (AFE)</td><td>Descartar</td><td>Fora do escopo do Monitoramento Regulatório Diário.</td></tr>
           </table>
         </div>
@@ -354,12 +353,11 @@ td.actions{min-width:135px}
           <tr><td>Coluna S</td><td>Usar link direto da publicação específica.</td></tr>
           <tr><td>Coluna T</td><td>Inserir fórmula: <b>="E-mail encaminhado para: "&M(linha)</b>.</td></tr>
 
-          <tr><td>Motor de Decisão</td><td>Aplicar a IT-SUP-9.0244 e os complementos definidos pela Regulamentação antes de sugerir registro ou descarte.</td></tr>
+          <tr><td>Motor de Decisão — conforme IT (exceto ANS)</td><td>Aplicar a IT-SUP-9.0244 e os complementos definidos pela Regulamentação antes de sugerir registro ou descarte.</td></tr>
           <tr><td>Monitorar</td><td>Medicamentos, produtos para saúde, saneantes, alimentos, fórmulas infantis, legislações em saúde, RDC, RE, IN, portarias, leis, decretos, consultas públicas e alertas sanitários com impacto aplicável.</td></tr>
           <tr><td>Descartar - Cosméticos</td><td>Cosméticos ficam fora do escopo do monitoramento diário.</td></tr>
           <tr><td>Descartar - Equipamentos</td><td>Equipamentos médicos, sistemas e equipamentos devem ser descartados no fluxo da Regulamentação, pois são monitorados pela Engenharia Clínica.</td></tr>
           <tr><td>Descartar - AFE</td><td>Publicações sobre Autorização de Funcionamento de Empresa (AFE), incluindo concessão, alteração, renovação ou cancelamento, devem ser descartadas.</td></tr>
-          <tr><td>Descartar - ANS</td><td>ANS, saúde suplementar, RN ANS, TISS, IDSS, NIP, Ressarcimento ao SUS e temas correlatos não entram no painel da Camila, pois são tratados por outra rotina/colega.</td></tr>
           <tr><td>Descartar - outros</td><td>Fumo, assuntos trabalhistas, ensaios clínicos, uso in vitro, deferimentos, indeferimentos e certificação de Boas Práticas devem ser descartados conforme IT.</td></tr>
           <tr><td>E-mail</td><td>Assunto padronizado, como <b>NOTÍCIA ANVISA</b>, <b>NOTÍCIA COFEN</b>, <b>COMUNICADO DOU</b> ou <b>ALERTA ANVISA</b>. Corpo resumido, sem copiar o título original.</td></tr>
           <tr><td>Motor de Comunicação</td><td>Remove repetições como "A ANVISA publicou notícia sobre a Anvisa publicou..." e transforma em resumo institucional.</td></tr>
@@ -370,7 +368,7 @@ td.actions{min-width:135px}
 </div>
 
 <div class="footerVersion">
-  Versão 4.0 · Backup completo · Motor em nuvem integrado<br>
+  Versão 4.1 · ANS fora do escopo · Backup completo<br>
   Fluxo por publicação específica, com validação antes de planilha/e-mail.
 </div>
 
@@ -481,7 +479,6 @@ function decisionHint(text){
     {terms:["cosmético","cosmetico","cosméticos","cosmeticos"], action:"Descartar", reason:"Cosméticos ficam fora do escopo do monitoramento diário."},
     {terms:["equipamento médico","equipamentos médicos","equipamento hospitalar","equipamentos hospitalares","sistema e equipamento"], action:"Descartar", reason:"Tema monitorado pela Engenharia Clínica."},
     {terms:["autorização de funcionamento","autorizacao de funcionamento","afe"], action:"Descartar", reason:"Autorização de Funcionamento de Empresa (AFE) fora do escopo do monitoramento diário."},
-    {terms:["ans","saúde suplementar","saude suplementar","tiss","idss","nip","ressarcimento ao sus"], action:"Descartar", reason:"Tema tratado por outra rotina/colega da área."},
     {terms:["fumo","tabaco"], action:"Descartar", reason:"Fumo fora do escopo."},
     {terms:["ensaio clínico","ensaios clínicos","ensaio clinico","ensaios clinicos"], action:"Descartar", reason:"Ensaios clínicos devem ser desconsiderados conforme IT."},
     {terms:["in vitro"], action:"Descartar", reason:"Uso in vitro deve ser desconsiderado conforme IT."},

@@ -1,5 +1,5 @@
 {
-  "versao": "4.0-final-backup-completo",
+  "versao": "4.1-sem-ans-backup-completo",
   "gerado_em": null,
   "fontes_monitoradas": [
     "CREMERS",
@@ -20,5 +20,6 @@
   "total_descartar": 0,
   "total_novos": 0,
   "erros": [],
-  "publicacoes": []
+  "publicacoes": [],
+  "observacao_escopo": "ANS integralmente desconsiderada. Aplicam-se DOU, ANVISA, Alertas ANVISA e Conselhos."
 }

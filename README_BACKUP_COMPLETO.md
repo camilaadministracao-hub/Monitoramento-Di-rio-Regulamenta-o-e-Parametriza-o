@@ -1,4 +1,4 @@
-# Monitoramento Regulatório Diário — V4.0 FINAL
+# Monitoramento Regulatório Diário — V4.1 — ANS FORA DO ESCOPO
 
 Este pacote é o backup completo de todo o código-fonte acumulado do projeto.
 
@@ -21,3 +21,12 @@ Este pacote é o backup completo de todo o código-fonte acumulado do projeto.
 - `data/resultado_atual.json`: resultado lido pelo sistema.
 - `data/historico/`: histórico de execuções.
 - `resultado_atual.json`: cópia de compatibilidade.
+
+
+## Regra de escopo V4.1
+A parte referente à Agência Nacional de Saúde Suplementar (ANS) foi integralmente desconsiderada.
+O sistema não consulta, não classifica e não exibe conteúdos de ANS, saúde suplementar, TISS, IDSS,
+NIP, Ressarcimento ao SUS ou ROL de Procedimentos.
+
+As regras da IT-SUP-9.0244 aplicadas ao sistema estão registradas em:
+`config/regras_it_sup_9_0244_sem_ans.json`.

@@ -14,3 +14,8 @@ IMPLANTAÇÃO NO GITHUB
 9. Clique em Carregar resultado do monitoramento.
 
 Não abra o index.html localmente para testar o carregamento em nuvem. Use o link do GitHub Pages.
+
+
+ESCOPO:
+- Incluídos: DOU, ANVISA, Alertas ANVISA e Conselhos.
+- Excluído integralmente: ANS.

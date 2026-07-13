@@ -1,8 +1,24 @@
 {
-  "gerado_em": "Aguardando primeira execução",
-  "total": 0,
-  "novos": 0,
-  "erros": 0,
-  "fontes": [],
-  "itens": []
+  "versao": "4.0-final-backup-completo",
+  "gerado_em": null,
+  "fontes_monitoradas": [
+    "CREMERS",
+    "CFM",
+    "COREN-RS",
+    "COFEN",
+    "CRF-RS",
+    "CRN-2",
+    "CRO-RS",
+    "CRTR-6",
+    "ANVISA",
+    "ALERTAS ANVISA",
+    "DOU"
+  ],
+  "fontes_status": [],
+  "total_publicacoes": 0,
+  "total_registrar_encaminhar": 0,
+  "total_descartar": 0,
+  "total_novos": 0,
+  "erros": [],
+  "publicacoes": []
 }

@@ -1,0 +1,16 @@
+IMPLANTAÇÃO NO GITHUB
+
+1. Extraia o ZIP.
+2. No repositório, use Add file > Upload files.
+3. Envie TODO o conteúdo interno da pasta extraída.
+4. Confirme Commit changes.
+5. Verifique se existem:
+   .github/workflows/monitoramento.yml
+   scripts/monitorar.py
+   data/resultado_atual.json
+6. Vá em Actions > Monitoramento Regulatório Diário > Run workflow.
+7. Aguarde Success.
+8. Aguarde o GitHub Pages republicar e pressione Ctrl+F5.
+9. Clique em Carregar resultado do monitoramento.
+
+Não abra o index.html localmente para testar o carregamento em nuvem. Use o link do GitHub Pages.

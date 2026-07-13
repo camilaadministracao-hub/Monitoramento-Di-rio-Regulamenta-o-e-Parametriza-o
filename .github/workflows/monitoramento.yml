@@ -30,6 +30,6 @@ jobs:
         run: |
           git config user.name "monitoramento-automatico"
           git config user.email "actions@github.com"
-          git add data/resultado_atual.json data/historico/*.json
+          git add resultado_atual.json
           git commit -m "Atualiza monitoramento regulatório" || echo "Sem alterações para salvar"
           git push
